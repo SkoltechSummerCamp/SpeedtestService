@@ -16,9 +16,7 @@ jobs:
         run: |
           mkdir gh-artifacts
           mv iPerf/src/iperf gh-artifacts/
-          chmod +x gh-artifacts/iperf
-          mv start_iperf.py gh-artifacts/
-          ARTIFACT_NAME="iperf-$(gh-artifacts/iperf -v 2>&1 | cut -d' ' -f3)-$GITHUB_RUN_NUMBER"
+          ARTIFACT_NAME="speedtest-service-$(gh-artifacts/iperf -v 2>&1 | cut -d' ' -f3)-$GITHUB_RUN_NUMBER"
           mkdir -p .github/variables
           echo "{\"variables\": [{\"name\": \"artifactName\",  \"value\": \"$ARTIFACT_NAME\"}]}" > .github/variables/variables.json
       
@@ -26,6 +24,26 @@ jobs:
         uses: deep-mm/set-variables@v1.0
         with:
           variableFileName: 'variables'
+      
+      - name: Upload apk to artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.artifactName }}
+          path: gh-artifacts/*
+          
+  assembly:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Upload to artifacts
+        run: |
+          mkdir gh-artifacts
+          chmod +x gh-artifacts/iperf
+          mv start_iperf.py gh-artifacts/
+          ARTIFACT_NAME="speedtest-service-$(gh-artifacts/iperf -v 2>&1 | cut -d' ' -f3)-$GITHUB_RUN_NUMBER"
+          mkdir -p .github/variables
+          echo "{\"variables\": [{\"name\": \"artifactName\",  \"value\": \"$ARTIFACT_NAME\"}]}" > .github/variables/variables.json
       
       - name: Upload apk to artifacts
         uses: actions/upload-artifact@v2
