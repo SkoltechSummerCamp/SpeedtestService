@@ -1,9 +1,17 @@
+import os
 import shlex
 import argparse
 import subprocess
 from threading import Thread
 from queue import Queue
 
+def read_env_data():
+    env_data = {}
+    env_data['SPEED_TEST_SERVICE_NAME'] = os.environ.get('SPEED_TEST_SERVICE_NAME')
+    env_data['SERVICE_IP_ADDRESS'] = os.environ.get('SERVICE_IP_ADDRESS')
+    env_data['SERVICE_LOCATION'] = os.environ.get('SERVICE_LOCATION')
+    env_data['BALANCER_ADDRESS'] = os.environ.get('BALANCER_ADDRESS')
+    return env_data
 
 def create_arg_parser():
     parser = argparse.ArgumentParser()
@@ -59,5 +67,9 @@ def start_iperf(parameters: str, verbose=False):
 if __name__ == "__main__":
     arg_parser = create_arg_parser()
     namespace = arg_parser.parse_args()
+
+    env_data = read_env_data()
+    for key, value in env_data.items():
+        print(f'{key}: {value}')
 
     out = start_iperf(namespace.parameters, namespace.verbose)
