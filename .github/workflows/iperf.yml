@@ -36,12 +36,17 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      
+      - name: Compilation
+        run: ./scripts/build-iperf.sh
 
       - name: Upload to artifacts
         run: |
           mkdir gh-artifacts
           mv start_iperf.py gh-artifacts/
-          ARTIFACT_NAME="speedtest-service-$(gh-artifacts/iperf -v 2>&1 | cut -d' ' -f3)-$GITHUB_RUN_NUMBER"
+          ARTIFACT_NAME="speedtest-service-$(iPerf/src/iperf -v 2>&1 | cut -d' ' -f3)-$GITHUB_RUN_NUMBER"
           mkdir -p .github/variables
           echo "{\"variables\": [{\"name\": \"artifactName\",  \"value\": \"$ARTIFACT_NAME\"}]}" > .github/variables/variables.json
       
