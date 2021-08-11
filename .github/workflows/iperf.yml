@@ -1,0 +1,24 @@
+name: Build iPerf
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04 # проверить
+    steps:
+      - run: ARTIFACT_NAME="iperf-$(cat VERSION)-$GITHUB_RUN_NUMBER$REF"
+    
+      - uses: actions/checkout@v2
+      - name: Compilation
+      - run: ./build_scripts/iperf.sh
+
+      - name: Upload to artifacts
+        run: |
+          mkdir gh-artifacts
+          mv iPerf/src/iperf gh-artifacts/
+      
+      - name: Upload apk to artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.artifactName }}
+          path: gh-artifacts/*
