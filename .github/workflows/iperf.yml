@@ -31,5 +31,3 @@ jobs:
         with:
           name: ${{ env.artifactName }}
           path: gh-artifacts/*
-  assembly: 
-    runs-on: ubuntu-20.04
