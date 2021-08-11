@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-20.04 # проверить
     steps:
-      - run: ARTIFACT_NAME="iperf-$(cat VERSION)-$GITHUB_RUN_NUMBER$REF"
+      - run: ARTIFACT_NAME="iperf-$(cat VERSION)-$GITHUB_RUN_NUMBER"
     
       - uses: actions/checkout@v2
       - name: Compilation
