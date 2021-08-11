@@ -17,6 +17,12 @@ jobs:
           mkdir gh-artifacts
           mv iPerf/src/iperf gh-artifacts/
           ARTIFACT_NAME="iperf-$(gh-artifacts/iperf -v 2>&1 | cut -d' ' -f3)-$GITHUB_RUN_NUMBER"
+          echo "{\"variables\": [{\"name\": \"artifactName\"}]}" > .github/variables/variables.json
+      
+      - name: Set artifactName variable
+        uses: deep-mm/set-variables@v1.0
+        with:
+          variableFileName: 'variables'
       
       - name: Upload apk to artifacts
         uses: actions/upload-artifact@v2
