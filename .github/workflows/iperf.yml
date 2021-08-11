@@ -45,6 +45,11 @@ jobs:
           mkdir -p .github/variables
           echo "{\"variables\": [{\"name\": \"artifactName\",  \"value\": \"$ARTIFACT_NAME\"}]}" > .github/variables/variables.json
       
+      - name: Set artifactName variable
+        uses: deep-mm/set-variables@v1.0
+        with:
+          variableFileName: 'variables'
+      
       - name: Upload apk to artifacts
         uses: actions/upload-artifact@v2
         with:
