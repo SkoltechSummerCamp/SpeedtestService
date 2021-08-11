@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-20.04 # проверить
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: recursive
       - name: Compilation
         run: ./build_scripts/iperf.sh
 
