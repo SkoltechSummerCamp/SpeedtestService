@@ -18,7 +18,7 @@ jobs:
           mv iPerf/src/iperf gh-artifacts/
           ARTIFACT_NAME="iperf-$(gh-artifacts/iperf -v 2>&1 | cut -d' ' -f3)-$GITHUB_RUN_NUMBER"
           mkdir -p .github/variables
-          echo "{\"variables\": [{\"name\": \"artifactName\"}]}" > .github/variables/variables.json
+          echo "{\"variables\": [{\"name\": \"artifactName\",  \"value\": \"$ARTIFACT_NAME\"}]}" > .github/variables/variables.json
       
       - name: Set artifactName variable
         uses: deep-mm/set-variables@v1.0
