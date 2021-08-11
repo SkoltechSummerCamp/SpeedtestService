@@ -16,6 +16,7 @@ jobs:
         run: |
           mkdir gh-artifacts
           mv iPerf/src/iperf gh-artifacts/
+          chmod +x gh-artifacts/iperf
           mv start_iperf.py gh-artifacts/
           ARTIFACT_NAME="iperf-$(gh-artifacts/iperf -v 2>&1 | cut -d' ' -f3)-$GITHUB_RUN_NUMBER"
           mkdir -p .github/variables
