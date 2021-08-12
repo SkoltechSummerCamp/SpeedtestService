@@ -45,6 +45,7 @@ jobs:
 
       - name: Upload to artifacts
         run: |
+          mkdir gh-artifacts/
           mv start_iperf.py gh-artifacts/
           mv iPerf/src/iperf gh-artifacts/
           ARTIFACT_NAME="speedtest-service-$(cat VERSION)-$GITHUB_RUN_NUMBER"
