@@ -1,6 +1,7 @@
 import os
 import shlex
 import argparse
+import datetime
 import subprocess
 from typing import IO
 from io import TextIOWrapper
@@ -28,6 +29,7 @@ def logger_thread(stream: IO, file: TextIOWrapper, verbose: bool):
     def logger(stream: IO, file: TextIOWrapper, verbose: bool):
         for stdout_line in iter(stream.readline, ""):
             file.writelines(stdout_line)
+            file.flush()
             if verbose:
                 print(stdout_line.replace('\n', ""))
         stream.close()
@@ -39,7 +41,23 @@ def logger_thread(stream: IO, file: TextIOWrapper, verbose: bool):
     return t
 
 
+def create_logs_stream():
+    logs_dir = "iperf_logs"
+    if not os.path.exists(logs_dir):
+        try:
+            os.mkdir(logs_dir)
+        except OSError:
+            print(f"Creation of the directory {logs_dir} failed")
+
+    curr_datetime = datetime.datetime.now().strftime("%Y-%m-%d_%I-%M-%S")
+
+    output_file = open(f"{logs_dir}/iperf_log-{curr_datetime}.txt", 'w')
+    error_file = open(f"{logs_dir}/iperf_errors-{curr_datetime}.txt", 'w')
+    return output_file, error_file
+
+
 def start_iperf(parameters: str, verbose: bool = False):
+    output_file, error_file = create_logs_stream()
 
     cmd = shlex.split("./iperf " + parameters)
     iperf_process = subprocess.Popen(
