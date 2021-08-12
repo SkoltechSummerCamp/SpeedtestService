@@ -2,6 +2,8 @@ import os
 import shlex
 import argparse
 import subprocess
+from typing import IO
+from io import TextIOWrapper
 from threading import Thread
 from queue import Queue
 
@@ -21,9 +23,9 @@ def create_arg_parser():
     return parser
 
 
-def logger_thread(stream, file, verbose):
+def logger_thread(stream: IO, file: TextIOWrapper, verbose: bool):
 
-    def logger(stream, file, verbose):
+    def logger(stream: IO, file: TextIOWrapper, verbose: bool):
         for stdout_line in iter(stream.readline, ""):
             file.writelines(stdout_line)
             if verbose:
@@ -37,9 +39,7 @@ def logger_thread(stream, file, verbose):
     return t
 
 
-def start_iperf(parameters: str, verbose=False):
-    output_file = open("iperf_log.txt", 'w')
-    error_file = open("iperf_errors.txt", 'w')
+def start_iperf(parameters: str, verbose: bool = False):
 
     cmd = shlex.split("./iperf " + parameters)
     iperf_process = subprocess.Popen(
