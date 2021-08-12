@@ -65,7 +65,7 @@ def start_iperf(parameters: str, verbose: bool = False):
     cmd = shlex.split("./iperf " + parameters)
     iperf_process = subprocess.Popen(
         cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
-    print("Iperf sever is started")
+    print("iPerf sever is started")
 
     threads = []
     if iperf_process.stdout is not None:
@@ -85,7 +85,7 @@ def start_iperf(parameters: str, verbose: bool = False):
     for t in threads:
         t.join()
 
-    print(f"Iperf server stopped with status {return_code}")
+    print(f"iPerf server stopped with status {return_code}")
     return return_code
 
 
