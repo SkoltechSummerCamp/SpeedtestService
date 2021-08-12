@@ -20,9 +20,9 @@ def read_env_data():
 
 def create_arg_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-v', '--verbose', action='store_true')
-    parser.add_argument('-p', '--parameters', type=str,
-                        action="store", default='-s')
+    parser.add_argument('-V', '--verbose', action='store_true')
+    parser.add_argument('-p', '--parameters', help="parameters for iPerf", type=str,
+                        action="store", default='-s -u')
 
     return parser
 
