@@ -6,20 +6,23 @@ import subprocess
 from typing import IO
 from io import TextIOWrapper
 from threading import Thread
-from queue import Queue
+
 
 def read_env_data():
     env_data = {}
-    env_data['SPEED_TEST_SERVICE_NAME'] = os.environ.get('SPEED_TEST_SERVICE_NAME')
+    env_data['SPEED_TEST_SERVICE_NAME'] = os.environ.get(
+        'SPEED_TEST_SERVICE_NAME')
     env_data['SERVICE_IP_ADDRESS'] = os.environ.get('SERVICE_IP_ADDRESS')
     env_data['SERVICE_LOCATION'] = os.environ.get('SERVICE_LOCATION')
     env_data['BALANCER_ADDRESS'] = os.environ.get('BALANCER_ADDRESS')
     return env_data
 
+
 def create_arg_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('-v', '--verbose', action='store_true')
-    parser.add_argument('-p', '--parameters', type=str, action="store", default='-s')
+    parser.add_argument('-p', '--parameters', type=str,
+                        action="store", default='-s')
 
     return parser
 
@@ -66,18 +69,22 @@ def start_iperf(parameters: str, verbose: bool = False):
 
     threads = []
     if iperf_process.stdout is not None:
-        threads.append(logger_thread(iperf_process.stdout, output_file, verbose))
+        threads.append(logger_thread(
+            iperf_process.stdout, output_file, verbose))
 
     if iperf_process.stderr is not None:
-        threads.append(logger_thread(iperf_process.stderr, error_file, verbose))
+        threads.append(logger_thread(
+            iperf_process.stderr, error_file, verbose))
 
     try:
         return_code = iperf_process.wait()
     except:
         iperf_process.kill()
         return_code = iperf_process.returncode
-        for t in threads:
-            t.join()
+
+    for t in threads:
+        t.join()
+
     print(f"Iperf server stopped with status {return_code}")
     return return_code
 
