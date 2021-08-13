@@ -21,9 +21,9 @@ jobs:
           mkdir gh-artifacts
           mv iPerf/src/iperf gh-artifacts/
           chmod +x gh-artifacts/iperf
-          ARTIFACT_NAME="iperf-$(gh-artifacts/iperf -v 2>&1 | cut -d' ' -f3).$GITHUB_RUN_NUMBER"
+          ARTIFACT_NAME="iperf-2.0.13.$GITHUB_RUN_NUMBER"
           mkdir -p .github/variables
-          echo "{\"variables\": [{\"name\": \"job1ArtifactName\",  \"value\": \"$ARTIFACT_NAME\"}]}" > .github/variables/variables.json
+          echo "{\"variables\": [{\"name\": \"artifactName\",  \"value\": \"$ARTIFACT_NAME\"}]}" > .github/variables/variables.json
       
       - name: Set artifactName variable
         uses: deep-mm/set-variables@v1.0
@@ -33,7 +33,7 @@ jobs:
       - name: Upload apk to artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.job1ArtifactName }}
+          name: ${{ env.artifactName }}
           path: gh-artifacts/*
           
   speedtest-service:
@@ -44,7 +44,7 @@ jobs:
       - name: Download result of the first job
         uses: actions/download-artifact@v2
         with:
-          name: ${{ env.job2ArtifactName }}
+          name: iperf-2.0.13.$GITHUB_RUN_NUMBER
       
       - name: Upload to artifacts
         run: |
@@ -54,7 +54,7 @@ jobs:
           
           ARTIFACT_NAME="speedtest-service-$(cat VERSION)-$GITHUB_RUN_NUMBER"
           mkdir -p .github/variables
-          echo "{\"variables\": [{\"name\": \"job2ArtifactName\",  \"value\": \"$ARTIFACT_NAME\"}]}" > .github/variables/variables.json
+          echo "{\"variables\": [{\"name\": \"artifactName\",  \"value\": \"$ARTIFACT_NAME\"}]}" > .github/variables/variables.json
       
       - name: Set artifactName variable
         uses: deep-mm/set-variables@v1.0
@@ -64,5 +64,5 @@ jobs:
       - name: Upload apk to artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.job2ArtifactName }}
+          name: ${{ env.artifactName }}
           path: gh-artifacts/*
