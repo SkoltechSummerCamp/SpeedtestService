@@ -1,6 +1,10 @@
-name: Build iPerf
+name: Build docker image
 
-on: [push, pull_request]
+on: 
+  push:
+    branches: [main, develop, feature/docker-image]
+  pull_request:
+    branches: [main, develop, feature/docker-image]
 
 jobs:
   build-iperf:
