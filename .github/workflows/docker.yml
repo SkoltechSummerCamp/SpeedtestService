@@ -38,6 +38,7 @@ jobs:
           
   speedtest-service:
     runs-on: ubuntu-20.04
+    needs: build-iperf
     steps:
       - uses: actions/checkout@v2
       
