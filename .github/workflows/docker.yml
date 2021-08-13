@@ -21,7 +21,7 @@ jobs:
           mkdir gh-artifacts
           mv iPerf/src/iperf gh-artifacts/
           chmod +x gh-artifacts/iperf
-          ARTIFACT_NAME="iperf-2.0.13.$GITHUB_RUN_NUMBER"
+          ARTIFACT_NAME="iperf-2.0.13.${{ GITHUB_RUN_NUMBER }}"
           mkdir -p .github/variables
           echo "{\"variables\": [{\"name\": \"artifactName\",  \"value\": \"$ARTIFACT_NAME\"}]}" > .github/variables/variables.json
       
