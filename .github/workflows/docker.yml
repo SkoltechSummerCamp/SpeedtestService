@@ -2,9 +2,9 @@ name: Build docker image
 
 on: 
   push:
-    branches: [main, develop, feature/docker-image]
+    branches: [main, develop, feature/deploy-action]
   pull_request:
-    branches: [main, develop, feature/docker-image]
+    branches: [main, develop, feature/deploy-action]
 
 jobs:
   build-iperf:
