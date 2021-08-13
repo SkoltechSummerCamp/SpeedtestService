@@ -52,8 +52,9 @@ jobs:
           mkdir gh-artifacts/
           mv start_iperf.py gh-artifacts/
           mv iperf gh-artifacts/
+          mv Dockerfile gh-artifacts/
           
-          ARTIFACT_NAME="speedtest-service-$(cat VERSION)-$GITHUB_RUN_NUMBER"
+          ARTIFACT_NAME="speedtest-service-$(cat VERSION).$GITHUB_RUN_NUMBER"
           mkdir -p .github/variables
           echo "{\"variables\": [{\"name\": \"artifactName\",  \"value\": \"$ARTIFACT_NAME\"}]}" > .github/variables/variables.json
       
@@ -67,3 +68,26 @@ jobs:
         with:
           name: ${{ env.artifactName }}
           path: gh-artifacts/*
+
+  publish-to-dockerhub:
+    runs-on: ubuntu-20.04
+    needs: speedtest-service
+    steps:
+      - name: Download result of the second job
+        uses: actions/download-artifact@v2
+        with:
+          name: speedtest-service-0.0.1.${{ github.run_number }}
+      
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+    
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v1
+        with:
+          context: .
+          push: true
+      
+      
