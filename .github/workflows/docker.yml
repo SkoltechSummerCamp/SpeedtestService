@@ -78,6 +78,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: speedtest-service-0.0.1.${{ github.run_number }}
+      
+      - name: List all artifacts to compact
+      - run: ls ./
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
@@ -89,6 +92,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: bitskoff/speedtest-service:latest
+          tags: bitskoff/speedtest-service:0.0.1
 
  
