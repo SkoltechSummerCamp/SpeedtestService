@@ -56,7 +56,7 @@ class Iperf_wrapper():
             t.join()
 
         self.is_started = False
-        print(f"iPerf server stopped with status {return_code}")
+        print(f"iPerf stopped with status {return_code}")
 
     def start(self):
         if not self.is_started:
@@ -65,7 +65,7 @@ class Iperf_wrapper():
             cmd = shlex.split("./iperf " + self.iperf_parameters)
             self.iperf_process = subprocess.Popen(
                 cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
-            print("iPerf sever is started")
+            print("iPerf is started")
             self.is_started = True
 
             self.iperf_waiting_thread = Thread(target=self.__waiting_thread)
@@ -88,8 +88,6 @@ class Iperf_wrapper():
         self.iperf_process.terminate()
         self.iperf_waiting_thread.join()
         return_code = self.iperf_process.poll()
-
-        ps = subprocess.Popen("ps")
 
         return return_code
 
