@@ -107,6 +107,6 @@ jobs:
         with:
           context: ./gh-artifacts
           push: true
-          tags: ${{ secrets.DOCKER_PASSWORD }}/speedtest-service:0.0.1
+          tags: ${{ secrets.DOCKER_USERNAME }}/speedtest-service:0.0.1
 
  
