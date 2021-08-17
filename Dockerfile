@@ -12,4 +12,5 @@ RUN pip3 install -r requirements.txt
 COPY iperf iperf
 COPY server.py server.py
 COPY iperf_wrapper.py iperf_wrapper.py
+RUN chmod +x iperf
 CMD python3 -u server.py
