@@ -1,5 +1,6 @@
-FROM alpine:latest
-RUN apk add --no-cache python3 py3-pip gcompat libstdc++6
+FROM ubuntu:20.04
+RUN apt-get update
+RUN apt-get install python3 python3-pip
 
 WORKDIR /SpeedtestService
 EXPOSE 5000
