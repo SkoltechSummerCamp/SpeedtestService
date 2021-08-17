@@ -81,7 +81,8 @@ jobs:
       - name: Setup version variable
         run: |
           mkdir -p .github/variables
-          echo "{\"variables\": [{\"version\": \"(cat VERSION)\"}]}" > .github/variables/variables.json
+          VERSION=$(cat VERSION)
+          echo "{\"variables\": [{\"version\": \"$VERSION\"}]}" > .github/variables/variables.json
 
       - uses: deep-mm/set-variables@v1.0
         with:
