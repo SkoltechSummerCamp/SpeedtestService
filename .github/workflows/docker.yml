@@ -50,7 +50,8 @@ jobs:
       - name: Upload to artifacts
         run: |
           mkdir gh-artifacts/
-          mv start_iperf.py gh-artifacts/
+          mv server.py gh-artifacts/
+          mv iperf_wrapper.py gh-artifacts/
           mv iperf gh-artifacts/
           mv Dockerfile gh-artifacts/
           mv requirements.txt gh-artifacts/
