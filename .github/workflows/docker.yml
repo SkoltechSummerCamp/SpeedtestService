@@ -21,7 +21,7 @@ jobs:
           mkdir gh-artifacts
           mv iPerf/src/iperf gh-artifacts/
           
-          echo "artifactName=\"iperf-2.0.13.$GITHUB_RUN_NUMBER\"" > $GITHUB_ENV
+          echo "artifactName=iperf-2.0.13.$GITHUB_RUN_NUMBER" > $GITHUB_ENV
       
       - name: Upload iperf binary to artifacts
         uses: actions/upload-artifact@v2
@@ -48,7 +48,7 @@ jobs:
           mv Dockerfile gh-artifacts/
           mv requirements.txt gh-artifacts/
           
-          echo "artifactName=\"speedtest-service-$(cat VERSION).$GITHUB_RUN_NUMBER\"" > $GITHUB_ENV
+          echo "artifactName=speedtest-service-$(cat VERSION).$GITHUB_RUN_NUMBER" > $GITHUB_ENV
       
       - name: Upload all server files to artifacts
         uses: actions/upload-artifact@v2
