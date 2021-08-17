@@ -74,14 +74,27 @@ jobs:
   publish-to-dockerhub:
     runs-on: ubuntu-20.04
     needs: speedtest-service
+    
     steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup version variable
+        run: |
+          mkdir -p .github/variables
+          echo "{\"variables\": [{\"version\": \"(cat VERSION)\"}]}" > .github/variables/variables.json
+
+      - uses: deep-mm/set-variables@v1.0
+        with:
+          variableFileName: 'variables'
+    
       - name: Download result of the second job
         uses: actions/download-artifact@v2
         with:
           name: speedtest-service-0.0.1.${{ github.run_number }}
+          path: gh-artifacts
       
       - name: List all artifacts to compact
-        run: ls ./
+        run: ls .gh-artifacts/
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
@@ -92,8 +105,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ./gh-artifacts
           push: true
-          tags: bitskoff/speedtest-service:0.0.1
+          tags: ${{ secrets.DOCKER_PASSWORD }}/speedtest-service:0.0.1
 
  
