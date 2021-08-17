@@ -34,9 +34,8 @@ def stop_iperf():
 
     if iperf.is_started:
         status = iperf.stop()
-        return str(f"iPerf server stopped with status {status}")
+        return str(f"iPerf stopped with status {status}")
 
     return "iPerf already stopped"
 
-
-app.run()
+app.run(host="0.0.0.0", port="5000")
