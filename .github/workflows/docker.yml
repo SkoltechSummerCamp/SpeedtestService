@@ -20,6 +20,7 @@ jobs:
         run: |
           mkdir gh-artifacts
           mv iPerf/src/iperf gh-artifacts/
+          chmod +x gh-artifacts/iperf
           
           echo "artifactName=iperf-2.0.13.$GITHUB_RUN_NUMBER" > $GITHUB_ENV
       
