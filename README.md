@@ -1,5 +1,7 @@
 # SpeedtestService
-[![Build Status](https://github.com/aranhid/SpeedtestService/workflows/Build%20docker%20image/badge.svg)](https://github.com/aranhid/SpeedtestService/actions)
+
+[![Build Status](https://github.com/SkoltechSummerCamp/SpeedtestService/workflows/Build%20docker%20image/badge.svg)](https://github.com/SkoltechSummerCamp/SpeedtestService/actions)
+
 ## Usage
 
 **iPerf binary is placed in the same directory as `iperf_wrapper.py` script.**
