@@ -16,21 +16,14 @@ jobs:
       - name: Compilation
         run: ./scripts/build-iperf.sh
 
-      - name: Upload to artifacts
+      - name: Setup artifact content
         run: |
           mkdir gh-artifacts
           mv iPerf/src/iperf gh-artifacts/
-          chmod +x gh-artifacts/iperf
-          ARTIFACT_NAME="iperf-2.0.13.${{ github.run_number }}"
-          mkdir -p .github/variables
-          echo "{\"variables\": [{\"name\": \"artifactName\",  \"value\": \"$ARTIFACT_NAME\"}]}" > .github/variables/variables.json
+          
+          echo "artifactName=\"iperf-2.0.13.$GITHUB_RUN_NUMBER\"" > $GITHUB_ENV
       
-      - name: Set artifactName variable
-        uses: deep-mm/set-variables@v1.0
-        with:
-          variableFileName: 'variables'
-      
-      - name: Upload apk to artifacts
+      - name: Upload iperf binary to artifacts
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.artifactName }}
@@ -42,12 +35,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Download result of the first job
-        uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v2
         with:
           name: iperf-2.0.13.${{ github.run_number }}
       
-      - name: Upload to artifacts
+      - name: Setup artifact content
         run: |
           mkdir gh-artifacts/
           mv server.py gh-artifacts/
@@ -56,16 +48,9 @@ jobs:
           mv Dockerfile gh-artifacts/
           mv requirements.txt gh-artifacts/
           
-          ARTIFACT_NAME="speedtest-service-$(cat VERSION).$GITHUB_RUN_NUMBER"
-          mkdir -p .github/variables
-          echo "{\"variables\": [{\"name\": \"artifactName\",  \"value\": \"$ARTIFACT_NAME\"}]}" > .github/variables/variables.json
+          echo "artifactName=\"speedtest-service-$(cat VERSION).$GITHUB_RUN_NUMBER\"" > $GITHUB_ENV
       
-      - name: Set artifactName variable
-        uses: deep-mm/set-variables@v1.0
-        with:
-          variableFileName: 'variables'
-      
-      - name: Upload apk to artifacts
+      - name: Upload all server files to artifacts
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.artifactName }}
@@ -80,16 +65,11 @@ jobs:
       
       - name: Setup version variable
         run: echo "version=$(cat VERSION)" > $GITHUB_ENV
-          
     
-      - name: Download result of the second job
-        uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v2
         with:
           name: speedtest-service-${{ env.version }}.${{ github.run_number }}
           path: gh-artifacts
-      
-      - name: List all artifacts to compact
-        run: ls ./gh-artifacts/
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
