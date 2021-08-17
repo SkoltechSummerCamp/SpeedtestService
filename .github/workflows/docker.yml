@@ -79,14 +79,8 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Setup version variable
-        run: |
-          mkdir -p .github/variables
-          VERSION=$(cat VERSION)
-          echo "{\"variables\": [{\"version\": \"$VERSION\"}]}" > .github/variables/variables.json
-
-      - uses: deep-mm/set-variables@v1.0
-        with:
-          variableFileName: 'variables'
+        run: echo "version=$(cat VERSION)" > $GITHUB_ENV
+          
     
       - name: Download result of the second job
         uses: actions/download-artifact@v2
