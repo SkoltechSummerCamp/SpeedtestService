@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 RUN apt-get update
-RUN apt-get install python3 python3-pip
+RUN apt-get install -y python3 python3-pip
 
 WORKDIR /SpeedtestService
 EXPOSE 5000
