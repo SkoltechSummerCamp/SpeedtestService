@@ -2,21 +2,33 @@
 [![Build Status](https://github.com/aranhid/SpeedtestService/workflows/Build%20docker%20image/badge.svg)](https://github.com/aranhid/SpeedtestService/actions)
 ## Usage
 
-**iPerf binary is placed in the same directory as `start_iperf.py` script.**
+**iPerf binary is placed in the same directory as `iperf_wrapper.py` script.**
 
-Basic usage (iPerf runs with arguments "-s -u"):
+To start the server you need to run the command:
+
 ```bash
-python3 start_iperf.py 
+python3 server.py 
 ```
-Pass parameters to iPerf:
-```bash
-python3 start_iperf.py -p='-s -t 10'
+
+The server listens port `5000` and can handle the following GET requests:
+
+* start-iperf
+* stop-iperf
+
+### start-iperf GET request
+To start the iPerf with parameters, specified in `args`.
+
 ```
-Print logs to stdin:
-```bash
-python3 start_iperf.py -V 
+http://localhost:5000/start-iperf?args=-s%20-t%2010
 ```
-Both:
-```bash
-python3 start_iperf.py -V -p='-s -t 10'
+
+If request has no `args`, iPerf will start with `-s -u` parameters.
+
+If iPerf is already running, it will restart with new `args`. 
+
+### stop-iperf GET request
+Stop the iPerf process.
+
+```
+http://localhost:5000/stop-iperf
 ```
