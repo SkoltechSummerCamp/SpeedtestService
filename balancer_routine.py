@@ -15,3 +15,12 @@ def post_to_server(port=5201):
         api_instance.server_post_ip(body=body)
     except ApiException as e:
         print("Exception when calling ServerApi->server_post_ip: %s\n" % e)
+
+def delete_from_server(port=5201):
+    body = swagger_client.ServerAddr(port=port) # ServerAddr | port of iperf server. Ip and time could be emply (optional)
+    try:
+        # delete server IP
+        api_response = api_instance.server_delete_ip(body=body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ServerApi->server_delete_ip: %s\n" % e)
