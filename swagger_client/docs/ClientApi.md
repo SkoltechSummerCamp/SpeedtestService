@@ -1,6 +1,6 @@
 # swagger_client.ClientApi
 
-All URIs are relative to *https://localhost/Skoltech_OpenRAN_5G/iperf_load_balancer/0.0.1*
+All URIs are relative to *http://localhost/Skoltech_OpenRAN_5G/iperf_load_balancer/0.0.1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
