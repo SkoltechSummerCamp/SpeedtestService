@@ -64,7 +64,7 @@ except ApiException as e:
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost/Skoltech_OpenRAN_5G/iperf_load_balancer/0.0.1*
+All URIs are relative to *http://localhost:8080/Skoltech_OpenRAN_5G/iperf_load_balancer/0.0.1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
