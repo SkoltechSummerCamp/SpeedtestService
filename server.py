@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 from iperf_wrapper import Iperf_wrapper
 
+import balancer_routine
 
 app = Flask(__name__)
 
@@ -38,4 +39,7 @@ def stop_iperf():
 
     return "iPerf already stopped"
 
+balancer_routine.post_to_server(port=5201)
 app.run(host="0.0.0.0", port="5000")
+
+

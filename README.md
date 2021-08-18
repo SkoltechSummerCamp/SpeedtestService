@@ -9,6 +9,9 @@
 To start the server you need to run the command:
 
 ```bash
+cd swagger_client
+python3 setup.py install --user
+cd ..
 python3 server.py 
 ```
 
