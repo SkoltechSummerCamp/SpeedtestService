@@ -4,6 +4,7 @@ import swagger_client
 from swagger_client.rest import ApiException
 from pprint import pprint
 from threading import Timer
+import sys
 
 # create an instance of the API class
 api_instance = swagger_client.ServerApi()
@@ -30,8 +31,12 @@ class Watchdog(Exception):
     def __init__(self, timeout, userHandler=None):  # timeout in seconds
         self.timeout = timeout
         self.handler = userHandler if userHandler is not None else self.defaultHandler
-        self.timer = Timer(self.timeout, self.handler)
-        self.timer.start()
+        try:
+            self.timer = Timer(self.timeout, self.handler)
+            self.timer.start()
+        except:
+            sys.exit()
+        
 
     def reset(self):
         self.timer.cancel()
@@ -41,5 +46,8 @@ class Watchdog(Exception):
     def stop(self):
         self.timer.cancel()
 
+    def __del__(self):
+        self.timer.cancel()
+
     def defaultHandler(self):
-        raise self
+        return 

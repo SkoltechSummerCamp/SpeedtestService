@@ -7,8 +7,6 @@ from typing import IO
 from io import TextIOWrapper
 from threading import Thread
 
-import balancer_routine
-
 
 class Iperf_wrapper():
 
