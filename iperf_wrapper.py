@@ -64,7 +64,7 @@ class Iperf_wrapper():
         if not self.is_started:
             output_file, error_file = self.__create_logs_stream()
 
-            cmd = shlex.split("./iperf " + env_data['IPERF_PORT'] + self.iperf_parameters)
+            cmd = shlex.split("./iperf.elf " + '-p ' + port + ' ' + self.iperf_parameters)
             self.iperf_process = subprocess.Popen(
                 cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
             print("iPerf is started")
@@ -124,7 +124,7 @@ if __name__ == "__main__":
         print(f'{key}: {value}')
 
     iperf_wrapper = Iperf_wrapper(namespace.parameters, True)
-    iperf_wrapper.start()
+    iperf_wrapper.start(env_data['IPERF_PORT'])
     try:
         while True:
             pass

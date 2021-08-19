@@ -2,6 +2,21 @@
 
 [![Build Status](https://github.com/SkoltechSummerCamp/SpeedtestService/workflows/Build%20docker%20image/badge.svg)](https://github.com/SkoltechSummerCamp/SpeedtestService/actions)
 
+### Building Iperf
+
+Just start iPerf_build.sh
+
+```bash
+./scripts/build-iperf.sh
+```
+
+### Cloning repo
+
+```bash
+git clone --recursive --recurse-submodules $repo_link
+```
+
+
 ## Usage
 
 **iPerf binary is placed in the same directory as `iperf_wrapper.py` script.**
