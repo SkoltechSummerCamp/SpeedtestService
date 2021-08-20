@@ -2,13 +2,36 @@
 
 [![Build Status](https://github.com/SkoltechSummerCamp/SpeedtestService/workflows/Build%20docker%20image/badge.svg)](https://github.com/SkoltechSummerCamp/SpeedtestService/actions)
 
+### Building Iperf
+
+Just start iPerf_build.sh
+
+```bash
+./scripts/build-iperf.sh
+```
+
+### Cloning repo
+
+```bash
+git clone --recursive --recurse-submodules $repo_link
+```
+
+
 ## Usage
 
 **iPerf binary is placed in the same directory as `iperf_wrapper.py` script.**
 
+
+
 To start the server you need to run the command:
 
-```bash
+1. Build Iperf
+2. Run python
+
+```
+cd swagger_client
+python3 setup.py install --user
+cd ..
 python3 server.py 
 ```
 

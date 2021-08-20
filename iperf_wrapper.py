@@ -7,6 +7,9 @@ from typing import IO
 from io import TextIOWrapper
 from threading import Thread
 
+from balancer_routine import balancer_routine
+from balancer_routine import env_data
+
 
 class Iperf_wrapper():
 
@@ -56,13 +59,14 @@ class Iperf_wrapper():
             t.join()
 
         self.is_started = False
+        balancer_routine.post_to_server(port=int(balancer_routine.env_data['IPERF_PORT']))
         print(f"iPerf stopped with status {return_code}")
 
-    def start(self):
+    def start(self, port):
         if not self.is_started:
             output_file, error_file = self.__create_logs_stream()
 
-            cmd = shlex.split("./iperf " + self.iperf_parameters)
+            cmd = shlex.split("./iperf.elf " + '-p ' + port + ' ' + self.iperf_parameters)
             self.iperf_process = subprocess.Popen(
                 cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
             print("iPerf is started")
@@ -99,6 +103,8 @@ def read_env_data():
     env_data['SERVICE_IP_ADDRESS'] = os.environ.get('SERVICE_IP_ADDRESS')
     env_data['SERVICE_LOCATION'] = os.environ.get('SERVICE_LOCATION')
     env_data['BALANCER_ADDRESS'] = os.environ.get('BALANCER_ADDRESS')
+    env_data['IPERF_PORT'] = os.getenv('IPERF_PORT', '5201')
+    env_data['CONNECTING_TIMEOUT'] = os.getenv('CONNECTING_TIMEOUT', '30')
     return env_data
 
 
@@ -120,7 +126,7 @@ if __name__ == "__main__":
         print(f'{key}: {value}')
 
     iperf_wrapper = Iperf_wrapper(namespace.parameters, True)
-    iperf_wrapper.start()
+    iperf_wrapper.start(env_data['IPERF_PORT'])
     try:
         while True:
             pass

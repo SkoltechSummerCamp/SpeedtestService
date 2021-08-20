@@ -1,8 +1,3 @@
-/iperf_logs
-/__pycache__
-
-iperf
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -67,7 +62,3 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
-
-#iPerf build output
-*.elf
-
