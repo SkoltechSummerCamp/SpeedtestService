@@ -31,7 +31,7 @@ class TestClientApi(unittest.TestCase):
     def test_client_optain_ip(self):
         """Test case for client_optain_ip
 
-        optain iperf server ip list to connect to  # noqa: E501
+        obtain iperf server ip list to connect to  # noqa: E501
         """
         pass
 

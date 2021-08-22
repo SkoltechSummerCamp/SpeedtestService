@@ -33,7 +33,7 @@ class ClientApi(object):
         self.api_client = api_client
 
     def client_optain_ip(self, **kwargs):  # noqa: E501
-        """optain iperf server ip list to connect to  # noqa: E501
+        """obtain iperf server ip list to connect to  # noqa: E501
 
         Return servers ip list  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -54,7 +54,7 @@ class ClientApi(object):
             return data
 
     def client_optain_ip_with_http_info(self, **kwargs):  # noqa: E501
-        """optain iperf server ip list to connect to  # noqa: E501
+        """obtain iperf server ip list to connect to  # noqa: E501
 
         Return servers ip list  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

@@ -55,7 +55,7 @@ from pprint import pprint
 api_instance = swagger_client.ClientApi(swagger_client.ApiClient(configuration))
 
 try:
-    # optain iperf server ip list to connect to
+    # obtain iperf server ip list to connect to
     api_response = api_instance.client_optain_ip()
     pprint(api_response)
 except ApiException as e:
@@ -68,7 +68,7 @@ All URIs are relative to *http://localhost:8080/Skoltech_OpenRAN_5G/iperf_load_b
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ClientApi* | [**client_optain_ip**](docs/ClientApi.md#client_optain_ip) | **GET** /addr | optain iperf server ip list to connect to
+*ClientApi* | [**client_optain_ip**](docs/ClientApi.md#client_optain_ip) | **GET** /addr | obtain iperf server ip list to connect to
 *ServerApi* | [**server_delete_ip**](docs/ServerApi.md#server_delete_ip) | **POST** /addr_del | delete server IP
 *ServerApi* | [**server_post_ip**](docs/ServerApi.md#server_post_ip) | **POST** /addr | post self ip to balancer
 

@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost:8080/Skoltech_OpenRAN_5G/iperf_load_b
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**client_optain_ip**](ClientApi.md#client_optain_ip) | **GET** /addr | optain iperf server ip list to connect to
+[**client_optain_ip**](ClientApi.md#client_optain_ip) | **GET** /addr | obtain iperf server ip list to connect to
 
 # **client_optain_ip**
 > list[ServerAddr] client_optain_ip()
 
-optain iperf server ip list to connect to
+obtain iperf server ip list to connect to
 
 Return servers ip list
 
@@ -25,7 +25,7 @@ from pprint import pprint
 api_instance = swagger_client.ClientApi()
 
 try:
-    # optain iperf server ip list to connect to
+    # obtain iperf server ip list to connect to
     api_response = api_instance.client_optain_ip()
     pprint(api_response)
 except ApiException as e:
