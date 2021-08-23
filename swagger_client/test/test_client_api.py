@@ -28,8 +28,8 @@ class TestClientApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_client_optain_ip(self):
-        """Test case for client_optain_ip
+    def test_client_obtain_ip(self):
+        """Test case for client_obtain_ip
 
         obtain iperf server ip list to connect to  # noqa: E501
         """

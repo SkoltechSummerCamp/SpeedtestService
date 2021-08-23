@@ -32,13 +32,13 @@ class ClientApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def client_optain_ip(self, **kwargs):  # noqa: E501
+    def client_obtain_ip(self, **kwargs):  # noqa: E501
         """obtain iperf server ip list to connect to  # noqa: E501
 
         Return servers ip list  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.client_optain_ip(async_req=True)
+        >>> thread = api.client_obtain_ip(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -48,18 +48,18 @@ class ClientApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.client_optain_ip_with_http_info(**kwargs)  # noqa: E501
+            return self.client_obtain_ip_with_http_info(**kwargs)  # noqa: E501
         else:
-            (data) = self.client_optain_ip_with_http_info(**kwargs)  # noqa: E501
+            (data) = self.client_obtain_ip_with_http_info(**kwargs)  # noqa: E501
             return data
 
-    def client_optain_ip_with_http_info(self, **kwargs):  # noqa: E501
+    def client_obtain_ip_with_http_info(self, **kwargs):  # noqa: E501
         """obtain iperf server ip list to connect to  # noqa: E501
 
         Return servers ip list  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.client_optain_ip_with_http_info(async_req=True)
+        >>> thread = api.client_obtain_ip_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -79,7 +79,7 @@ class ClientApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method client_optain_ip" % key
+                    " to method client_obtain_ip" % key
                 )
             params[key] = val
         del params['kwargs']
