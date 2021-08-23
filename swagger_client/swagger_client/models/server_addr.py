@@ -51,8 +51,7 @@ class ServerAddr(object):
         if ip is not None:
             self.ip = ip
         self.port = port
-        if port_iperf is not None:
-            self.port_iperf = port_iperf
+        self.port_iperf = port_iperf
         if time is not None:
             self.time = time
 
@@ -122,6 +121,8 @@ class ServerAddr(object):
         :param port_iperf: The port_iperf of this ServerAddr.  # noqa: E501
         :type: int
         """
+        if port_iperf is None:
+            raise ValueError("Invalid value for `port_iperf`, must not be `None`")  # noqa: E501
 
         self._port_iperf = port_iperf
 
