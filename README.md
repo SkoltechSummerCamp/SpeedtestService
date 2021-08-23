@@ -40,6 +40,8 @@ The server listens port `5000` and can handle the following GET requests:
 * start-iperf
 * stop-iperf
 
+> Set environment variables for IPERF_PORT and SERVICE_PORT, to allow multiple service on one server 
+
 ### start-iperf GET request
 To start the iPerf with parameters, specified in `args`.
 

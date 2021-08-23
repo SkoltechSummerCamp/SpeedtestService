@@ -8,6 +8,8 @@ then
     #apply the patch
     echo "patching iPerf"
     patch src/Launch.cpp < ../scripts/iPerf_patch.diff
+else
+    echo "already pathed"
 fi
 bash configure
 make
