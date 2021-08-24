@@ -58,7 +58,7 @@ class Iperf_wrapper():
             t.join()
 
         self.is_started = False
-        balancer_routine.post_to_server(port=int(balancer_routine.env_data['IPERF_PORT']))
+        balancer_routine.post_to_server(port=int(balancer_routine.env_data['SERVICE_PORT']), port_iperf=int(balancer_routine.env_data['IPERF_PORT']), ip=balancer_routine.env_data['SERVICE_IP_ADDRESS'])
         print(f"iPerf stopped with status {return_code}")
 
     def start(self, port_iperf):
