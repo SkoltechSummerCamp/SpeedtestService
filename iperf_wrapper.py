@@ -12,7 +12,6 @@ from balancer_routine import env_data
 
 
 class Iperf_wrapper():
-
     def __init__(self, parameters: str = "-s -u", verbose: bool = False) -> None:
         self.threads: list = []
         self.iperf_waiting_thread: Thread = None
