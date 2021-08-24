@@ -18,7 +18,7 @@ jobs:
           generate 
           -i swagger_source/swagger.yaml 
           -l python
-          -o server
+          -o swagger_client
   
     - name: patch __main__.py
       continue-on-error: true
