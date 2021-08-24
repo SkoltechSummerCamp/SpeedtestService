@@ -26,6 +26,8 @@ COPY server.py /usr/src/app
 COPY iperf_wrapper.py /usr/src/app
 
 CMD chmod +x iperf.elf
+CMD chmod +x /usr/src/app/iperf.elf
+CMD chmod a+rwx /usr/src/app/iperf.elf
 
 ENTRYPOINT ["python3"]
 
