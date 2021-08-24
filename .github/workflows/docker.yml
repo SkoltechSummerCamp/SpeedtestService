@@ -21,6 +21,7 @@ jobs:
           -o server
   
     - name: patch __main__.py
+      continue-on-error: true
       run: |
         head -2 swagger_client/swagger_client/configuration.py | grep vinogradov.alek@gmail.com
         #If the patch has not been applied then the $? which is the exit status 
@@ -33,7 +34,6 @@ jobs:
           echo "patching configuration.py"
           patch swagger_client/swagger_client/configuration.py < swagger_client/configuration.patch
         fi
-      contitue-on-error: true
     - uses: stefanzweifel/git-auto-commit-action@v4 # commiting changes
 
   build-iperf:
