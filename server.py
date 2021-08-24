@@ -41,7 +41,7 @@ def stop_iperf():
 
     if iperf.is_started:
         status = iperf.stop()
-        balancer_routine.post_to_server(port=int(balancer_routine.env_data['SERVICE_PORT']), port_iperf=int(balancer_routine.env_data['IPERF_PORT']))
+        balancer_routine.post_to_server(port=int(balancer_routine.env_data['SERVICE_PORT']), port_iperf=int(balancer_routine.env_data['IPERF_PORT']), ip=balancer_routine.env_data['SERVICE_IP_ADDRESS'])
         watchdog.reset()
         return str(f"iPerf stopped with status {status}")
 
@@ -50,12 +50,12 @@ def stop_iperf():
 def TimeoutHandler():
     if iperf.is_started:
         status = iperf.stop()
-    balancer_routine.post_to_server(port=int(balancer_routine.env_data['SERVICE_PORT']), port_iperf=int(balancer_routine.env_data['IPERF_PORT']))
+    balancer_routine.post_to_server(port=int(balancer_routine.env_data['SERVICE_PORT']), port_iperf=int(balancer_routine.env_data['IPERF_PORT']), ip=balancer_routine.env_data['SERVICE_IP_ADDRESS'])
     watchdog.reset()
 
 def signal_handler(sig, frame):
     watchdog.stop()
-    balancer_routine.delete_from_server(port=int(balancer_routine.env_data['SERVICE_PORT']), port_iperf=int(balancer_routine.env_data['IPERF_PORT']))
+    balancer_routine.delete_from_server(port=int(balancer_routine.env_data['SERVICE_PORT']), port_iperf=int(balancer_routine.env_data['IPERF_PORT']), ip=balancer_routine.env_data['SERVICE_IP_ADDRESS'])
     sys.exit(0)
 
 signal.signal(signal.SIGINT, signal_handler)
@@ -66,7 +66,7 @@ for key, value in balancer_routine.env_data.items(): # print env variables
     print(f'{key}: {value}')
 
 watchdog = Watchdog(int(balancer_routine.env_data['CONNECTING_TIMEOUT']), TimeoutHandler) # start watchdog
-balancer_routine.post_to_server(port=int(balancer_routine.env_data['SERVICE_PORT']), port_iperf=int(balancer_routine.env_data['IPERF_PORT']))
+balancer_routine.post_to_server(port=int(balancer_routine.env_data['SERVICE_PORT']), port_iperf=int(balancer_routine.env_data['IPERF_PORT']), ip=balancer_routine.env_data['SERVICE_IP_ADDRESS'])
 
 
 app.run(host="0.0.0.0", port=balancer_routine.env_data['SERVICE_PORT'])
