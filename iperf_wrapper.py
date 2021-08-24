@@ -105,7 +105,7 @@ def read_env_data():
     env_data['BALANCER_ADDRESS'] = os.environ.get('BALANCER_ADDRESS')
     env_data['IPERF_PORT'] = os.getenv('IPERF_PORT', '5001')
     env_data['SERVICE_PORT'] = os.getenv('SERVICE_PORT', '5000')
-    env_data['CONNECTING_TIMEOUT'] = os.getenv('CONNECTING_TIMEOUT', '30')
+    env_data['CONNECTING_TIMEOUT'] = os.getenv('CONNECTING_TIMEOUT', '120')
     return env_data
 
 
