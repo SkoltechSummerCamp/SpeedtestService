@@ -42,6 +42,12 @@ The server listens port `5000` and can handle the following GET requests:
 
 > Set environment variables for IPERF_PORT and SERVICE_PORT, to allow multiple service on one server 
 
+## Starting with Docker
+
+```bash
+docker run -e BALANCER_BASE_URL=192.168.15.109:8080 docker_image_name
+```
+
 ### start-iperf GET request
 To start the iPerf with parameters, specified in `args`.
 

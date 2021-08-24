@@ -1,0 +1,7 @@
+*** /dev/null
+--- /dev/null
+***************
+*** 51
+-         self.host = "http://localhost:8080/Skoltech_OpenRAN_5G/iperf_load_balancer/0.1.0"
+--- 53 -----
++         self.host = "http://" + os.getenv('BALANCER_BASE_URL', "localhost:8080") + "/Skoltech_OpenRAN_5G/iperf_load_balancer/0.1.0"

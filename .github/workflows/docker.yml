@@ -7,8 +7,38 @@ on:
     branches: [main, develop]
 
 jobs:
+  generate:
+   runs-on: ubuntu-latest
+   steps:
+    - uses: actions/checkout@main    
+    - name: Swagger Codegen v3
+      uses: ducksify/swagger-codegen-action@v3.0
+      with:
+        args: >
+          generate 
+          -i swagger_source/swagger.yaml 
+          -l python
+          -o server
+  
+    - name: patch __main__.py
+      run: |
+        head -2 swagger_client/swagger_client/configuration.py | grep vinogradov.alek@gmail.com
+        #If the patch has not been applied then the $? which is the exit status 
+        #for last command would have a success status code = 0
+        if [ $? -eq 0 ];
+        then
+          echo "already pathed"
+        else
+          #apply the patch
+          echo "patching configuration.py"
+          patch swagger_client/swagger_client/configuration.py < swagger_client/configuration.patch
+        fi
+      contitue-on-error: true
+    - uses: stefanzweifel/git-auto-commit-action@v4 # commiting changes
+
   build-iperf:
     runs-on: ubuntu-20.04
+    needs: generate
     steps:
       - uses: actions/checkout@v2
         with:
@@ -19,7 +49,7 @@ jobs:
       - name: Setup artifact content
         run: |
           mkdir gh-artifacts
-          mv iPerf/src/iperf gh-artifacts/
+          mv iperf.elf gh-artifacts/
           
           echo "artifactName=iperf-2.0.13.$GITHUB_RUN_NUMBER" > $GITHUB_ENV
       
@@ -44,9 +74,11 @@ jobs:
           mkdir gh-artifacts/
           mv server.py gh-artifacts/
           mv iperf_wrapper.py gh-artifacts/
-          mv iperf gh-artifacts/
+          mv balancer_routine.py gh-artifacts/
+          mv iperf.elf gh-artifacts/
           mv Dockerfile gh-artifacts/
           mv requirements.txt gh-artifacts/
+          mv swagger_client/ gh-artifacts/swagger_client/
           
           echo "artifactName=speedtest-service-$(cat VERSION).$GITHUB_RUN_NUMBER" > $GITHUB_ENV
       

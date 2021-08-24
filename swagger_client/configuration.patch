@@ -1,0 +1,8 @@
+1a2
+> # Patched by AleksandrVi vinogradov.alek@gmail.com
+19a21
+> import os
+49c51
+<         self.host = "http://localhost:8080/Skoltech_OpenRAN_5G/iperf_load_balancer/0.1.0"
+---
+>         self.host = "http://" + os.getenv('BALANCER_BASE_URL', "localhost:8080") + "/Skoltech_OpenRAN_5G/iperf_load_balancer/0.1.0"
