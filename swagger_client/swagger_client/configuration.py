@@ -1,5 +1,4 @@
 # coding: utf-8
-# Patched by AleksandrVi vinogradov.alek@gmail.com
 
 """
     Balancer
@@ -18,7 +17,6 @@ import logging
 import multiprocessing
 import sys
 import urllib3
-import os
 
 import six
 from six.moves import http_client as httplib
@@ -48,7 +46,7 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
     def __init__(self):
         """Constructor"""
         # Default Base url
-        self.host = "http://" + os.getenv('BALANCER_BASE_URL', "localhost:8080") + "/Skoltech_OpenRAN_5G/iperf_load_balancer/0.1.0"
+        self.host = "http://localhost:8080/Skoltech_OpenRAN_5G/iperf_load_balancer/0.1.0"
         # Temp file folder for downloading files
         self.temp_folder_path = None
 
