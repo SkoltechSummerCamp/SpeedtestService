@@ -5,4 +5,4 @@
 157a160
 >     fprintf(stderr, "\n server request completed \n");
 158a162
->     kill(getpid(), SIGKILL);
+>     exit();
