@@ -5,7 +5,7 @@
 121a124
 >     fprintf(stderr, "\n server request completed \n");
 122a126
->     kill(getpid(), 2);
+>     kill(getpid(), 9);
 139a144
 >     fprintf(stderr, "\n spawning clinet\n");
 141d145
