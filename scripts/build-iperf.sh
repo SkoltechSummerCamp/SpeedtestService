@@ -14,5 +14,5 @@ fi
 bash configure
 make
 cd ..
-cp iPerf/src/iperf iperf.elf
+#cp iPerf/src/iperf iperf.elf
 
