@@ -7,7 +7,7 @@ if [ $? -eq 1 ];
 then
     #apply the patch
     echo "patching iPerf"
-    patch src/Launch.cpp < ../scripts/iPerf_patch.diff
+    patch src/Launch.cpp < ../scripts/iPerf_Launch.patch
 else
     echo "already pathed"
 fi
