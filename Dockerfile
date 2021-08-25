@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM python:3.6-alpine
 
 RUN apt-get update
 RUN apt-get install -y python3 python3-pip
