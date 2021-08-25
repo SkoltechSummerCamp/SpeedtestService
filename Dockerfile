@@ -1,7 +1,7 @@
 FROM python:3.6-alpine
 
-RUN apt-get update
-RUN apt-get install -y python3 python3-pip
+#RUN apt-get update
+#RUN apt-get install -y python3 python3-pip
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
