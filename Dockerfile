@@ -1,7 +1,7 @@
-FROM python:3.6-alpine
+FROM ubuntu:20.04
 
-#RUN apt-get update
-#RUN apt-get install -y python3 python3-pip
+RUN apt-get update
+RUN apt-get install -y python3 python3-pip
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -27,6 +27,4 @@ COPY balancer_routine.py /usr/src/app
 COPY server.py /usr/src/app
 COPY iperf_wrapper.py /usr/src/app
 
-ENTRYPOINT ["python3"]
-
-CMD ["server.py"]
+CMD python3 server.py
