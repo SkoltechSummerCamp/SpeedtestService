@@ -105,6 +105,6 @@ jobs:
         with:
           context: ./gh-artifacts
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/speedtest-service-ubuntu:${{ env.version }}
+          tags: skoltech/speedtest-service:${{ env.version }}.${{ github.run_number }}
 
  
