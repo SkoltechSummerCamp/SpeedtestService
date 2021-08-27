@@ -12,7 +12,6 @@ from balancer_routine import env_data
 
 
 class Iperf_wrapper():
-
     def __init__(self, parameters: str = "-s -u", verbose: bool = False) -> None:
         self.threads: list = []
         self.iperf_waiting_thread: Thread = None
@@ -59,14 +58,14 @@ class Iperf_wrapper():
             t.join()
 
         self.is_started = False
-        balancer_routine.post_to_server(port=int(balancer_routine.env_data['IPERF_PORT']))
+        balancer_routine.post_to_server(port=int(balancer_routine.env_data['SERVICE_PORT']), port_iperf=int(balancer_routine.env_data['IPERF_PORT']), ip=balancer_routine.env_data['SERVICE_IP_ADDRESS'])
         print(f"iPerf stopped with status {return_code}")
 
-    def start(self, port):
+    def start(self, port_iperf):
         if not self.is_started:
             output_file, error_file = self.__create_logs_stream()
 
-            cmd = shlex.split("./iperf.elf " + '-p ' + port + ' ' + self.iperf_parameters)
+            cmd = shlex.split("./iperf.elf " + '-p ' + port_iperf + ' ' + self.iperf_parameters)
             self.iperf_process = subprocess.Popen(
                 cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
             print("iPerf is started")
@@ -103,8 +102,9 @@ def read_env_data():
     env_data['SERVICE_IP_ADDRESS'] = os.environ.get('SERVICE_IP_ADDRESS')
     env_data['SERVICE_LOCATION'] = os.environ.get('SERVICE_LOCATION')
     env_data['BALANCER_ADDRESS'] = os.environ.get('BALANCER_ADDRESS')
-    env_data['IPERF_PORT'] = os.getenv('IPERF_PORT', '5201')
-    env_data['CONNECTING_TIMEOUT'] = os.getenv('CONNECTING_TIMEOUT', '30')
+    env_data['IPERF_PORT'] = os.getenv('IPERF_PORT', '5001')
+    env_data['SERVICE_PORT'] = os.getenv('SERVICE_PORT', '5000')
+    env_data['CONNECTING_TIMEOUT'] = os.getenv('CONNECTING_TIMEOUT', '120')
     return env_data
 
 

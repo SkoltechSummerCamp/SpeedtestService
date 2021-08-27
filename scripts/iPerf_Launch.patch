@@ -1,0 +1,7 @@
+0a1
+> // PATCHED BY AleksandrVi vinogradov.alek@gmail.com
+152a154
+>     fprintf(stderr, "\n spawning server\n");
+157a160,161
+>     fprintf(stderr, "\n server request completed \n");
+>     kill(getpid(), SIGINT);
