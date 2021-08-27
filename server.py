@@ -24,11 +24,13 @@ def start_iperf_binary():
         iperf.iperf_parameters = iperf_parameters
 
     status = iperf.start(port_iperf=balancer_routine.env_data['IPERF_PORT'])
+
     if status:
         return f"iPerf started with parameters {iperf.iperf_parameters}"
 
     iperf.stop()
     status = iperf.start(port_iperf=balancer_routine.env_data['IPERF_PORT'])
+
     if status:
         return f"iPerf restarted with parameters {iperf.iperf_parameters}"
 

@@ -11,7 +11,7 @@ class BalancerRoutine:
         # create an instance of the API class
         self.api_instance = swagger_client.ServerApi()
 
-    def post_to_server(self, ip, port=5000, port_iperf=5001):
+def post_to_server(self, ip, port=5000, port_iperf=5001):
         body = swagger_client.ServerAddr(port=port, port_iperf=port_iperf, ip=ip) # ServerAddr | port of iperf server. Ip and time could be emply (optional)
         try:
             # post self ip to balancer
@@ -19,7 +19,7 @@ class BalancerRoutine:
         except ApiException as e:
             print("Exception when calling ServerApi->server_post_ip: %s\n" % e)
 
-    def delete_from_server(self, ip, port=5000, port_iperf=5001):
+def delete_from_server(self, ip, port=5000, port_iperf=5001):
         body = swagger_client.ServerAddr(port=port, port_iperf=port_iperf, ip=ip) # ServerAddr | port of iperf server. Ip and time could be emply (optional)
         try:
             # delete server IP
