@@ -45,7 +45,8 @@ The server listens port `5000` and can handle the following GET requests:
 ## Starting with Docker
 
 ```bash
-docker run -d -e BALANCER_BASE_URL=45.134.27.29:5555 -e SERVICE_IP_ADDRESS=45.134.27.29 -p 5000:5000 -p 5001:5001 -p 5001:5001/udp aleksandrvi/speedtest-service:0.1.0
+docker run -d -e BALANCER_BASE_URL=192.168.15.131:5555 -e SERVICE_IP_ADDRESS=192.168.15.132 -e CONNECTING_TIMEOUT=120 -e SERVICE_PORT=5004 -e IPERF_PORT=5005 -p 5004:5004  -p 5005:5005 -p 5005:5005/udp skoltech/speedtest-service:0.2.2
+
 ```
 
 
